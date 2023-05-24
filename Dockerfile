@@ -8,6 +8,10 @@ RUN apk add --update ethtool
 ARG INTERFACE=eth0
 ENV SOCKET_BUFFER=16777216
 
+USER root
+RUN setcap cap_net_admin=+ep /usr/sbin/ethtool
+USER ${USERNAME}
+
 # Устанавливаем параметры сетевого интерфейса
 RUN ethtool -G $INTERFACE rx $SOCKET_BUFFER tx $SOCKET_BUFFER
 
