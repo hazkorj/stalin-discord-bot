@@ -26,6 +26,12 @@ module.exports = {
             frameDuration: 20,
         });
 
+        connection.on('error', err => {
+            setTimeout(() => {
+                this.execute(message, args);
+            }, 5000);
+        });
+
         const videoInfo = await ytdl.getInfo(videoUrl);
 
         // Получаем ссылку на поток аудио
