@@ -1,5 +1,11 @@
 # Use the official Node.js image as the base image
-FROM node:20
+FROM ubuntu:latest
+LABEL maintainer="hazkorj <hazkorj@yandex.ru>"
+
+# Обновление пакетов и установка необходимых зависимостей
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get install -y nodejs
 
 WORKDIR /app
 
