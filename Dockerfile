@@ -1,12 +1,18 @@
 # Use the official Node.js image as the base image
 FROM node:20.0-alpine
 
+# Устанавливаем ethtool для настройки параметров сетевого буфера
+RUN apk add --update ethtool
+
+# Получаем имя сетевого интерфейса и устанавливаем размер буфера
+ARG INTERFACE=eth0
+ENV SOCKET_BUFFER=16777216
+
+# Устанавливаем параметры сетевого интерфейса
+RUN ethtool -G $INTERFACE rx $SOCKET_BUFFER tx $SOCKET_BUFFER
+
 # Обновление пакетов и установка необходимых зависимостей
 RUN apk add --update ffmpeg
-
-RUN echo 'net.core.rmem_max=10485760' >> /etc/sysctl.conf \
-    && echo 'net.core.wmem_max=10485760' >> /etc/sysctl.conf \
-    && sysctl -p
 
 ENV PATH="/usr/bin/ffmpeg:${PATH}"
 
