@@ -2,10 +2,11 @@ require('dotenv').config();
 
 const app = require('express')();
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-});
+app.get('/', function (req, res) {
+    res.send('Hello World')
+})
+
+app.listen(8080);
 
 const {Client, Events, GatewayIntentBits} = require('discord.js');
 const {prefix} = require('./config.json');
