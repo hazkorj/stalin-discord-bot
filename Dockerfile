@@ -2,7 +2,8 @@
 FROM node:20.0-alpine
 
 # Устанавливаем ethtool для настройки параметров сетевого буфера
-RUN apk add --update ethtool
+RUN apk add --update ethtool && \
+    apk add --no-cache libcap
 
 # Получаем имя сетевого интерфейса и устанавливаем размер буфера
 ARG INTERFACE=eth0
