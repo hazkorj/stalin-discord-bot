@@ -4,6 +4,8 @@ FROM alpine:latest
 # Обновление пакетов и установка необходимых зависимостей
 RUN apk add --update ffmpeg nodejs npm
 
+ENV PATH="/usr/bin/ffmpeg:${PATH}"
+
 WORKDIR /app
 
 COPY . /app
