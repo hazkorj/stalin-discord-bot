@@ -1,10 +1,17 @@
 require('dotenv').config();
 
 const app = require('express')();
+const request = require('request');
+
+
+setInterval(() => {
+    request('https://stalinbot-hazkorj.b4a.run/');
+},30000)
 
 app.get('/', function (req, res) {
-    res.send('Hello World')
-})
+    console.log('request');
+    res.send('Hello World');
+});
 
 app.listen(8080);
 
