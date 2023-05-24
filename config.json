@@ -1,0 +1,39 @@
+{
+  "prefix": "$",
+  "commandsData": {
+    "test": {
+      "name": "test",
+      "description": ""
+    },
+    "chatGpt": {
+      "name": "chat-gpt",
+      "shortName": "gpt",
+      "description": ""
+    },
+    "voice": {
+      "name": "voice",
+      "shortName": "v",
+      "description": ""
+    },
+    "pause": {
+      "name": "pause",
+      "shortName": "p",
+      "description": ""
+    },
+    "unpause": {
+      "name": "unpause",
+      "shortName": "up",
+      "description": ""
+    },
+    "stop": {
+      "name": "stop",
+      "shortName": "s",
+      "description": ""
+    },
+    "leave": {
+      "name": "leave",
+      "shortName": "l",
+      "description": ""
+    }
+  }
+}
