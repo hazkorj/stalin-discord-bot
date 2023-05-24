@@ -29,8 +29,9 @@ module.exports = {
         const videoInfo = await ytdl.getInfo(videoUrl);
 
         // Получаем ссылку на поток аудио
-        const audioUrl = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio' }).url;
-        const resource = createAudioResource(audioUrl);
+        const audioFormat = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio', filter: 'audioonly' });
+        const stream = ytdl.downloadFromInfo(videoInfo, { format: audioFormat });
+        const resource = createAudioResource(stream);
 
         player.play(resource);
         connection.subscribe(player);
