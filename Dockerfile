@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM alpine:latest:latest
+FROM alpine:latest
 
 # Обновление пакетов и установка необходимых зависимостей
 RUN apk add --update ffmpeg nodejs npm
