@@ -1,8 +1,8 @@
 # Use the official Node.js image as the base image
-FROM alpine:latest
+FROM node:20.0-alpine
 
 # Обновление пакетов и установка необходимых зависимостей
-RUN apk add --update ffmpeg nodejs npm
+RUN apk add --update ffmpeg
 
 ENV PATH="/usr/bin/ffmpeg:${PATH}"
 
