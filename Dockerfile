@@ -5,7 +5,8 @@ LABEL maintainer="hazkorj <hazkorj@yandex.ru>"
 # Обновление пакетов и установка необходимых зависимостей
 RUN apt-get update && \
     apt-get install -y ffmpeg && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    apt-get install -y npm
 
 WORKDIR /app
 
