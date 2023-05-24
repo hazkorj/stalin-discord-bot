@@ -17,6 +17,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "openai": "^3.2.1",
+    "opusscript": "^0.0.8",
     "request": "^2.88.2",
     "tweetnacl": "^1.0.3",
     "ytdl-core": "https://github.com:khlevon/node-ytdl-core.git#v4.11.4-patch.2"
