@@ -2,6 +2,7 @@ const {joinVoiceChannel, createAudioResource} = require('@discordjs/voice');
 const {player} = require('loader');
 const ytdl = require('ytdl-core');
 const commandData = require('config.json').commandsData.voice;
+const fs = require('fs');
 
 module.exports = {
     data: commandData,
@@ -23,7 +24,15 @@ module.exports = {
 
         // Получаем ссылку на поток аудио
         const audioUrl = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio' }).url;
-        const resource = createAudioResource(audioUrl);
+        const stream = fs.createReadStream(audioUrl);
+
+        const resource = createAudioResource(stream, {
+            inlineVolume: true,
+            buffering: {
+                duration: 10, // Установить меньшее значение
+                amount: 150,
+            },
+        });
 
         player.play(resource);
         connection.subscribe(player);
