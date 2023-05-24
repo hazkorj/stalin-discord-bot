@@ -1,12 +1,8 @@
 # Use the official Node.js image as the base image
-FROM ubuntu:latest
-LABEL maintainer="hazkorj <hazkorj@yandex.ru>"
+FROM alpine:latest:latest
 
 # Обновление пакетов и установка необходимых зависимостей
-RUN apt-get update && \
-    apt-get install -y ffmpeg && \
-    apt-get install -y nodejs && \
-    apt-get install -y npm
+RUN apk add --update ffmpeg nodejs npm
 
 WORKDIR /app
 
