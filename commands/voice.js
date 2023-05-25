@@ -31,7 +31,11 @@ module.exports = {
             console.error('stream error' + err.message);
         });
         const resource = createAudioResource(stream);
-        player.play(resource);
+
         connection.subscribe(player);
+
+        setTimeout(function () {
+            player.play(resource);
+        }, 5000);
     },
 }
