@@ -2,7 +2,7 @@ const {joinVoiceChannel, createAudioResource} = require('@discordjs/voice');
 const {player} = require('loader');
 const ytdl = require('ytdl-core');
 const commandData = require('config.json').commandsData.voice;
-const {opus} = require('opusscript');
+const {opus} = require('prism-media');
 
 module.exports = {
     data: commandData,
