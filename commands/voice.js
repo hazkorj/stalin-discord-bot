@@ -28,12 +28,13 @@ module.exports = {
 
         const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
         const decoder = new opus.Decoder({
+            rate: 48000,     // частота дискретизации: 48000 Гц
+            channels: 2,     // количество каналов: стерео (2)
+            frameSize: 960,  // размер фрейма: 20 мс при частоте дискретизации 48000 Гц
             discardPackets: true, // отбрасывать пакеты, которые не удается декодировать
             fec: true,       // использовать Forward Error Correction (FEC) для коррекции ошибок пакетов
             plc: false,      // использовать Packet Loss Concealment (PLC) для скрытия потерянных пакетов
-            optimizeForVariability: true,  // оптимизировать для переменного битрейта
-            maxPayloadSize: 7680,   // максимальный размер пакета: 7,68 КБ\
-            application: 'voip',    // определение назначения кодека
+            optimizeForVariability: false,  // оптимизировать для переменного битрейта
         });
 
         player.on('error', err => {
