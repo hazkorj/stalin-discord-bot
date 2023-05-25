@@ -46,6 +46,8 @@ module.exports = {
             });
         });
 
+
+
         connection.subscribe(player);
 
         const audioStream = stream.pipe(decoder).on('error', console.error);
