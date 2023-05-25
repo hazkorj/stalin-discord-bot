@@ -27,9 +27,9 @@ module.exports = {
         const answer = completion.data.choices[0].message.content;
         messages[message.author.id].push({ role: "assistant", content: answer });
 
-        if (answer.length > 1500) {
+        if (answer.length > 1800) {
             let start = 0;
-            for (let end = 1000; end <= answer.length; end += 1000) {
+            for (let end = 1800; end <= answer.length; end += 1800) {
                 message.reply(answer.slice(start, end));
                 start = end;
             }
