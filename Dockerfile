@@ -1,7 +1,6 @@
 # Use the official Node.js image as the base image
 FROM node:20.0-alpine
 
-RUN apk update && apk upgrade
 RUN apk add --update --no-cache bash openssh-client ffmpeg tcpdump net-tools iproute2 curl
 
 # Настройка SSH для подключения к удаленному хосту
