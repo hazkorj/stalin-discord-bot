@@ -27,7 +27,14 @@ module.exports = {
             frameDuration: 60,
         });
         const info = await ytdl.getInfo(videoUrl);
-        const stream = ytdl.downloadFromInfo(info,{quality: 'highestaudio', filter: 'audioonly'});
+
+        // Выбор формата с наибольшим битрейтом
+        const bestFormat = info.formats.reduce((prev, current) => {
+            return (prev.bitrate || 0) > (current.bitrate || 0) ? prev : current;
+        });
+        console.log(`Выбран формат: ${bestFormat.qualityLabel} (${bestFormat.audioBitrate}kbps аудио, ${bestFormat.bitrate}kbps видео)`);
+
+        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly', format: bestFormat});
         player.on('error', err => {
             console.error('stream error' + err.message);
         });
