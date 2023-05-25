@@ -42,8 +42,7 @@ module.exports = {
 
         connection.subscribe(player);
 
-        setTimeout(function () {
-            player.play(resource);
-        }, 5000);
+        console.log('playing');
+        player.play(resource);
     },
 }
