@@ -23,7 +23,7 @@ module.exports = {
             },
         });
 
-        const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly', });
+        const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly', highWaterMark: 1048576});
         stream.on('error', err => {
             console.error(err);
         });
