@@ -21,6 +21,9 @@ module.exports = {
                 type: 'opus',
                 quality: 'highestaudio'
             },
+            seek: 0,
+            volume: 1,
+            bitrate: '128k',
         });
 
         const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly'});
