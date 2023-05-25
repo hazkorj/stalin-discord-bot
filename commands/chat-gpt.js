@@ -31,6 +31,9 @@ module.exports = {
             let start = 0;
             for (let end = 1800; end <= answer.length; end += 1800) {
                 message.reply(answer.slice(start, end));
+                if ((end + 1800) > answer.length) {
+                    message.reply(answer.slice(end));
+                }
                 start = end;
             }
         }
