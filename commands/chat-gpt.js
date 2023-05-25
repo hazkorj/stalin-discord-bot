@@ -28,9 +28,11 @@ module.exports = {
         messages[message.author.id].push({ role: "assistant", content: answer });
 
         if (answer.length >= 2000) {
-            message.reply(answer.slice(0, 1999));
-            message.reply(answer.slice(1999))
-        } else {
+            for (let i = 0; i <= answer.length; i += 2000) {
+                message.reply(answer.slice(i));
+            }
+        }
+         else {
             message.reply(answer);
         }
     },
