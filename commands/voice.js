@@ -35,11 +35,9 @@ module.exports = {
             fec: true,       // использовать Forward Error Correction (FEC) для коррекции ошибок пакетов
             plc: false,      // использовать Packet Loss Concealment (PLC) для скрытия потерянных пакетов
             optimizeForVariability: false,  // оптимизировать для переменного битрейта
-            maxPayloadSize: 7680,   // максимальный размер пакета: 7,68 КБ
+            maxPayloadSize: 7680,   // максимальный размер пакета: 7,68 КБ\
+            application: 'voip',    // определение назначения кодека
         });
-        const audioStream = stream.pipe(decoder).on('error', console.error);
-
-        const resource = createAudioResource(audioStream);
 
         player.on('error', err => {
             console.error('stream error' + err.message);
@@ -50,9 +48,8 @@ module.exports = {
 
         connection.subscribe(player);
 
-        setTimeout(function () {
-            console.log('playing');
-            player.play(resource);
-        }, 5000);
+        const audioStream = stream.pipe(decoder).on('error', console.error);
+        const resource = createAudioResource(audioStream);
+        player.play(resource);
     },
 }
