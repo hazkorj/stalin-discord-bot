@@ -23,10 +23,10 @@ module.exports = {
             },
             seek: 0,
             volume: 1,
-            bitrate: '128k',
+            bitrate: '75k',
         });
 
-        const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly'});
+        const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly', });
         stream.on('error', err => {
             console.error(err);
         });
