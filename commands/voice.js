@@ -2,7 +2,6 @@ const {joinVoiceChannel, createAudioResource} = require('@discordjs/voice');
 const {player} = require('loader');
 const ytdl = require('ytdl-core');
 const commandData = require('config.json').commandsData.voice;
-const dgram = require('dgram');
 
 module.exports = {
     data: commandData,
@@ -22,8 +21,6 @@ module.exports = {
                 type: 'opus',
                 quality: 'highestaudio'
             },
-            udpSocket: await dgram.createSocket('udp4'),
-            frameDuration: 20,
         });
 
         connection.on('error', err => {
@@ -34,7 +31,6 @@ module.exports = {
 
         const videoInfo = await ytdl.getInfo(videoUrl);
 
-        // Получаем ссылку на поток аудио
         const audioFormat = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio', filter: 'audioonly' });
         const resource = createAudioResource(audioFormat.url);
         player.play(resource);
