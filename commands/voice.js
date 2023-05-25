@@ -18,12 +18,6 @@ module.exports = {
             channelId: voiceChannel.id,
             guildId: message.guild.id,
             adapterCreator: voiceChannel.guild.voiceAdapterCreator,
-            voiceEncoder: {
-                type: 'opus',
-                quality: 'highestaudio',
-            },
-            opusEncoded: true,
-            fec: true,
         });
 
         const decoder = new opus.Decoder({rate: 48000, channels: 2, frameSize: 960});
@@ -40,7 +34,7 @@ module.exports = {
         const resource = createAudioResource(stream, {
             inputType: 'opus'
         });
-        player.play(resource);
         connection.subscribe(player);
+        player.play(resource);
     },
 }
