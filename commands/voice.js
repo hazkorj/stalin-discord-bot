@@ -23,12 +23,6 @@ module.exports = {
             },
         });
 
-        connection.on('error', err => {
-            setTimeout(() => {
-                this.execute(message, args);
-            }, 5000);
-        });
-
         const videoInfo = await ytdl.getInfo(videoUrl);
 
         const audioFormat = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio', filter: 'audioonly' });
