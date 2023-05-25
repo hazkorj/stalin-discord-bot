@@ -1,14 +1,7 @@
 # Use the official Node.js image as the base image
 FROM node:20.0-alpine
 
-RUN apk add --update --no-cache openssh-client ffmpeg tcpdump net-tools iproute2 curl
-
-# Настройка SSH для подключения к удаленному хосту
-RUN mkdir -p /root/.ssh
-RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
-RUN echo "Host bot" >> /root/.ssh/config
-RUN echo "    StrictHostKeyChecking no" >> /root/.ssh/config
-RUN cat /root/.ssh/id_rsa.pub | ssh hazkorj@bot 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+RUN apk add --update --no-cache bash ffmpeg tcpdump net-tools iproute2 curl
 
 
 ENV PATH="/usr/bin/ffmpeg:${PATH}"
@@ -25,5 +18,4 @@ EXPOSE 8080
 
 # Define the entry point for the container
 
-CMD ["bash"]
-CMD ["npm", "start"]
+CMD bash -c "npm start"
