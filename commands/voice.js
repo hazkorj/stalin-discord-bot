@@ -20,16 +20,15 @@ module.exports = {
             voiceEncoder: {
                 type: 'opus',
                 quality: 'highestaudio',
-                highWaterMark: 1048576,
             },
         });
         setTimeout(() => {
-            const stream = ytdl(videoUrl, {quality: 'highestaudio', filter: 'audioonly', highWaterMark: 1048576});
+            const stream = ytdl(videoUrl, {quality: 'highestaudio', filter: 'audioonly'});
             stream.on('error', err => {
                 console.error(err);
             });
             const resource = createAudioResource(stream, {
-                bitrate: '64k',
+                bitrate: '18k',
             });
             player.play(resource);
             connection.subscribe(player);
