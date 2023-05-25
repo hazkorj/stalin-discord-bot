@@ -28,7 +28,7 @@ module.exports = {
         });
         const info = await ytdl.getInfo(videoUrl);
 
-        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly', format: info.formats.filter(f => f.audioBitrate)[0]});
+        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly', format: info.formats.filter((f) => f.container === 'mp3').filter(f => f.audioBitrate)[0]});
 
         const resource = createAudioResource(stream);
 
