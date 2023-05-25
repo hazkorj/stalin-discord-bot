@@ -23,11 +23,11 @@ module.exports = {
             },
             opusEncoded: true,
             fec: true,
-            bitrate: 128000,
+            bitrate: 256000,
             frameDuration: 60,
         });
-        const stream = ytdl(videoUrl, {quality: 'highestaudio', filter: 'audioonly'});
-        stream.on('error', err => {
+        const stream = ytdl(videoUrl, {quality: 'highestaudio:audioBitrate=256', filter: 'audioonly'});
+        player.on('error', err => {
             console.error('stream error' + err.message);
         });
         const resource = createAudioResource(stream);
