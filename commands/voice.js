@@ -2,7 +2,6 @@ const {joinVoiceChannel, createAudioResource} = require('@discordjs/voice');
 const {player} = require('loader');
 const ytdl = require('ytdl-core');
 const commandData = require('config.json').commandsData.voice;
-const { opus } = require('prism-media');
 
 module.exports = {
     data: commandData,
@@ -24,6 +23,10 @@ module.exports = {
             },
             opusEncoded: true,
             fec: true,
+            plc: true,
+            optimizeForVariability: false,  // оптимизировать для переменного битрейта
+            maxPayloadSize: 7680,   // максимальный размер пакета: 7,68 КБ
+            application: 'voip',
         });
 
         const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
