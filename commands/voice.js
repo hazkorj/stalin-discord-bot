@@ -26,7 +26,7 @@ module.exports = {
             fec: true,
         });
 
-        const stream = ytdl(videoUrl,{filter: (format) => format.container === 'mp3' && !!format.audioBitrate });
+        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
         const decoder = new opus.Decoder({ rate: 48000, channels: 2, frameSize: 960 });
         const audioStream = stream.pipe(decoder).on('error', console.error);
 
