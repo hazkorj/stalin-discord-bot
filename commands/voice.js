@@ -2,6 +2,7 @@ const {joinVoiceChannel, createAudioResource} = require('@discordjs/voice');
 const {player} = require('loader');
 const ytdl = require('ytdl-core');
 const commandData = require('config.json').commandsData.voice;
+const {opus} = require('opusscript');
 
 module.exports = {
     data: commandData,
@@ -23,13 +24,11 @@ module.exports = {
             },
             opusEncoded: true,
             fec: true,
-            plc: true,
-            optimizeForVariability: false,  // оптимизировать для переменного битрейта
-            maxPayloadSize: 7680,   // максимальный размер пакета: 7,68 КБ
-            application: 'voip',
         });
 
-        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
+        const decoder = new opus.Decoder({rate: 48000, channels: 2, frameSize: 960});
+
+        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'}).pipe(decoder);
 
         player.on('error', err => {
             console.error('stream error' + err.message);
@@ -38,7 +37,9 @@ module.exports = {
             });
         });
 
-        const resource = createAudioResource(stream);
+        const resource = createAudioResource(stream, {
+            inputType: 'opus'
+        });
         player.play(resource);
         connection.subscribe(player);
     },
