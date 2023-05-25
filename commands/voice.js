@@ -18,15 +18,16 @@ module.exports = {
             guildId: message.guild.id,
             adapterCreator: voiceChannel.guild.voiceAdapterCreator,
             voiceEncoder: {
-                type: 'pcm',
+                type: 'opus',
                 quality: 'highestaudio'
             },
         });
 
-        const videoInfo = await ytdl.getInfo(videoUrl);
-
-        const audioFormat = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio', filter: 'audioonly' });
-        const resource = createAudioResource(audioFormat.url);
+        const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly'});
+        stream.on('error', err => {
+            console.error(err);
+        });
+        const resource = createAudioResource(stream);
         player.play(resource);
         connection.subscribe(player);
     },
