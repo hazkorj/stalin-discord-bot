@@ -23,15 +23,16 @@ module.exports = {
                 highWaterMark: 1048576,
             },
         });
-
-        const stream = ytdl(videoUrl, {quality: 'highestaudio', filter: 'audioonly', highWaterMark: 1048576});
-        stream.on('error', err => {
-            console.error(err);
+        setTimeout(() => {
+            const stream = ytdl(videoUrl, {quality: 'highestaudio', filter: 'audioonly', highWaterMark: 1048576});
+            stream.on('error', err => {
+                console.error(err);
+            });
+            const resource = createAudioResource(stream, {
+                bitrate: '64k',
+            });
+            player.play(resource);
+            connection.subscribe(player);
         });
-        const resource = createAudioResource(stream, {
-            bitrate: '64k',
-        });
-        player.play(resource);
-        connection.subscribe(player);
     },
 }
