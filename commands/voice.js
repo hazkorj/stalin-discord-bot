@@ -23,8 +23,6 @@ module.exports = {
             },
             opusEncoded: true,
             fec: true,
-            bitrate: 256000,
-            frameDuration: 60,
         });
         const info = await ytdl.getInfo(videoUrl);
 
@@ -34,7 +32,7 @@ module.exports = {
         });
         console.log(`Выбран формат: ${bestFormat.qualityLabel} (${bestFormat.audioBitrate}kbps аудио, ${bestFormat.bitrate}kbps видео)`);
 
-        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
+        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly', format: bestFormat});
         player.on('error', err => {
             console.error('stream error' + err.message);
         });
