@@ -46,8 +46,8 @@ module.exports = {
             console.log(`a: ${a}, b: ${b}, c: ${c}`);
         });
 
-        stream.once('drain', function () {
+        setTimeout(function () {
             player.play(resource);
-        });
+        }, 5000);
     },
 }
