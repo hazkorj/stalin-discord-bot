@@ -27,15 +27,6 @@ module.exports = {
         });
 
         const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
-        const decoder = new opus.Decoder({
-            rate: stream.frameRate,     // частота дискретизации: 48000 Гц
-            channels: stream.channels,     // количество каналов: стерео (2)
-            frameSize: stream.frameSize,  // размер фрейма: 20 мс при частоте дискретизации 48000 Гц
-            discardPackets: true, // отбрасывать пакеты, которые не удается декодировать
-            fec: true,       // использовать Forward Error Correction (FEC) для коррекции ошибок пакетов
-            plc: false,      // использовать Packet Loss Concealment (PLC) для скрытия потерянных пакетов
-            optimizeForVariability: false,  // оптимизировать для переменного битрейта
-        });
 
         player.on('error', err => {
             console.error('stream error' + err.message);
@@ -44,8 +35,7 @@ module.exports = {
             });
         });
 
-        const audioStream = stream.pipe(decoder).on('error', console.error);
-        const resource = createAudioResource(audioStream);
+        const resource = createAudioResource(stream);
         player.play(resource);
         connection.subscribe(player);
     },
