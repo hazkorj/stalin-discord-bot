@@ -42,10 +42,6 @@ module.exports = {
 
         connection.subscribe(player);
 
-        stream.on('progress', function (a, b, c) {
-            console.log(`a: ${a}, b: ${b}, c: ${c}`);
-        });
-
         setTimeout(function () {
             player.play(resource);
         }, 5000);
