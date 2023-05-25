@@ -23,7 +23,7 @@ module.exports = {
             },
             opusEncoded: true,
             fec: true,
-            bitrate: 96000,
+            bitrate: 128000,
             frameDuration: 60,
         });
         const stream = ytdl(videoUrl, {quality: 'highestaudio', filter: 'audioonly'});
