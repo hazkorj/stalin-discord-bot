@@ -18,7 +18,7 @@ module.exports = {
             guildId: message.guild.id,
             adapterCreator: voiceChannel.guild.voiceAdapterCreator,
             voiceEncoder: {
-                type: 'opus',
+                type: 'pcm',
                 quality: 'highestaudio'
             },
         });

@@ -1,13 +1,7 @@
 require('dotenv').config();
 
 const app = require('express')();
-const request = require('request');
 const domain = require('domain');
-
-
-setInterval(() => {
-    request('https://stalinbot-hazkorj.b4a.run/');
-},30000)
 
 app.get('/', function (req, res) {
     console.log('request');
@@ -20,7 +14,7 @@ const botDomain = domain.create();
 
 botDomain.on('error', function(err) {
     console.error(err);
-    console.log('/n bot is continue working');
+    console.log('bot is continue working');
 });
 
 
