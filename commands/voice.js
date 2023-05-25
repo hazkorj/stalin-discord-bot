@@ -34,7 +34,7 @@ module.exports = {
         });
         console.log(`Выбран формат: ${bestFormat.qualityLabel} (${bestFormat.audioBitrate}kbps аудио, ${bestFormat.bitrate}kbps видео)`);
 
-        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly', format: bestFormat});
+        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
         player.on('error', err => {
             console.error('stream error' + err.message);
         });
@@ -42,7 +42,9 @@ module.exports = {
 
         connection.subscribe(player);
 
-        console.log('playing');
-        player.play(resource);
+        setTimeout(function () {
+            console.log('playing');
+            player.play(resource);
+        }, 5000);
     },
 }
