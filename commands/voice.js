@@ -39,7 +39,7 @@ module.exports = {
             console.log(`a: ${a}, b: ${b}, c: ${c}`);
         });
 
-        stream.on('end', function () {
+        stream.once('drain', function () {
             player.play(resource);
         });
     },
