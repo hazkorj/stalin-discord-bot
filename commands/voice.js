@@ -33,6 +33,6 @@ module.exports = {
             bitrate: '64k',
         });
         player.play(resource);
-        connection.subscribe(player, {});
+        connection.subscribe(player);
     },
 }
