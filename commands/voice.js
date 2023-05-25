@@ -2,7 +2,6 @@ const {joinVoiceChannel, createAudioResource} = require('@discordjs/voice');
 const {player} = require('loader');
 const ytdl = require('ytdl-core');
 const commandData = require('config.json').commandsData.voice;
-const {opus} = require('prism-media');
 
 module.exports = {
     data: commandData,
@@ -20,20 +19,9 @@ module.exports = {
             adapterCreator: voiceChannel.guild.voiceAdapterCreator,
         });
 
-        const decoder = new opus.Decoder({rate: 48000, channels: 2, frameSize: 960});
+        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
 
-        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'}).pipe(decoder);
-
-        player.on('error', err => {
-            console.error('stream error' + err.message);
-            setImmediate(function () {
-                player.play(resource);
-            });
-        });
-
-        const resource = createAudioResource(stream, {
-            inputType: 'opus'
-        });
+        const resource = createAudioResource(stream);
         connection.subscribe(player);
         player.play(resource);
     },
