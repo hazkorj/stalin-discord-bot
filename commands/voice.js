@@ -29,10 +29,15 @@ module.exports = {
         const info = await ytdl.getInfo(videoUrl);
 
         const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly', format: info.formats.filter(f => f.audioBitrate)[0]});
+
+        const resource = createAudioResource(stream);
+
         player.on('error', err => {
             console.error('stream error' + err.message);
+            setImmediate(function () {
+                player.play(resource);
+            });
         });
-        const resource = createAudioResource(stream);
 
         connection.subscribe(player);
 
