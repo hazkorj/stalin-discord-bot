@@ -1,4 +1,4 @@
-const {joinVoiceChannel, createAudioResource} = require('@discordjs/voice');
+const {joinVoiceChannel, createAudioResource, StreamType} = require('@discordjs/voice');
 const {player} = require('loader');
 const ytdl = require('ytdl-core');
 const commandData = require('config.json').commandsData.voice;
@@ -21,17 +21,18 @@ module.exports = {
                 type: 'opus',
                 quality: 'highestaudio'
             },
-            seek: 0,
-            volume: 1,
-            bitrate: '75k',
         });
 
         const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly', });
         stream.on('error', err => {
             console.error(err);
         });
-        const resource = createAudioResource(stream);
+        const resource = createAudioResource(stream, {
+            inlineVolume: true,
+            inputType: StreamType.Opus,
+            bitrate: '64k',
+        });
         player.play(resource);
-        connection.subscribe(player);
+        connection.subscribe(player, {});
     },
 }
