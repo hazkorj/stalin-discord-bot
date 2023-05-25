@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const app = require('express')();
 const request = require('request');
+const domain = require('domain');
 
 
 setInterval(() => {
@@ -14,6 +15,15 @@ app.get('/', function (req, res) {
 });
 
 app.listen(8080);
+
+const botDomain = domain.create();
+
+botDomain.on('error', function(err) {
+    console.error(err);
+    console.log('/n bot is continue working');
+});
+
+
 
 const {Client, Events, GatewayIntentBits} = require('discord.js');
 const {prefix} = require('./config.json');
@@ -49,4 +59,6 @@ client.on(Events.MessageCreate, async message => {
     }
 });
 
-client.login(token);
+botDomain.run(function () {
+    client.login(token);
+});
