@@ -23,8 +23,8 @@ module.exports = {
             },
             opusEncoded: true,
             fec: true,
-            bitrate: 128000,
-            frameDuration: 60,
+            bitrate: '128000',
+            frameDuration: '60',
         });
         const info = await ytdl.getInfo(videoUrl);
         const stream = await ytdl.downloadFromInfo(info,{quality: 'highestaudio', filter: 'audioonly'});
@@ -35,8 +35,12 @@ module.exports = {
 
         connection.subscribe(player);
 
-        setTimeout(function () {
+        stream.on('progress', function (a, b, c) {
+            console.log(`a: ${a}, b: ${b}, c: ${c}`);
+        });
+
+        stream.on('end', function () {
             player.play(resource);
-        }, 5000);
+        });
     },
 }
