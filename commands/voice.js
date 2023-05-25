@@ -24,8 +24,6 @@ module.exports = {
             },
             opusEncoded: true,
             fec: true,
-            bitrate: '256000',
-            framerate: '60'
         });
         const info = await ytdl.getInfo(videoUrl);
 
