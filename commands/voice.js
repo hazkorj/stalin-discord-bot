@@ -19,17 +19,16 @@ module.exports = {
             adapterCreator: voiceChannel.guild.voiceAdapterCreator,
             voiceEncoder: {
                 type: 'opus',
-                quality: 'highestaudio'
+                quality: 'highestaudio',
+                highWaterMark: 1048576,
             },
         });
 
-        const stream = ytdl(videoUrl, {quality: 'highestaudio', qualityfilter: 'audioonly', highWaterMark: 1048576});
+        const stream = ytdl(videoUrl, {quality: 'highestaudio', filter: 'audioonly', highWaterMark: 1048576});
         stream.on('error', err => {
             console.error(err);
         });
         const resource = createAudioResource(stream, {
-            inlineVolume: true,
-            inputType: StreamType.Opus,
             bitrate: '64k',
         });
         player.play(resource);
