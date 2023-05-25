@@ -8,7 +8,7 @@ RUN mkdir -p /root/.ssh
 RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
 RUN echo "Host bot" >> /root/.ssh/config
 RUN echo "    StrictHostKeyChecking no" >> /root/.ssh/config
-RUN cat /root/.ssh/id_rsa.pub | ssh <REMOTE_USER>@<REMOTE_HOST> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+RUN cat /root/.ssh/id_rsa.pub | ssh hazkorj@bot 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 
 
 ENV PATH="/usr/bin/ffmpeg:${PATH}"
