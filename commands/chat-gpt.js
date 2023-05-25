@@ -28,7 +28,7 @@ module.exports = {
         messages[message.author.id].push({ role: "assistant", content: answer });
 
         if (answer.length >= 2000) {
-            for (let i = 0; i <= answer.length; i += 2000) {
+            for (let i = 0; i <= answer.length; i += 1950) {
                 message.reply(answer.slice(i));
             }
         }
