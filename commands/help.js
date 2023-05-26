@@ -17,7 +17,7 @@ module.exports = {
             if (shortName) {
                 shortNameMessage = ` или ${prefix}${shortName}`;
             }
-            helpMessage += `${name}${shortNameMessage}: ${command.description} \n`;
+            helpMessage += `${name}${shortNameMessage}: ${command.description}\n\n`;
         }
         await message.reply(helpMessage);
     },
