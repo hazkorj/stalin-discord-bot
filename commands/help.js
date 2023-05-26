@@ -8,7 +8,7 @@ module.exports = {
         description: 'Список команд',
     },
     async execute(message) {
-        let helpMessage = '';
+        let helpMessage = 'Cписок команд:\n\n';
         for (let key of Object.keys(commandsData)) {
             const command = commandsData[key];
             const name = prefix + command.name;
@@ -17,7 +17,7 @@ module.exports = {
             if (shortName) {
                 shortNameMessage = ` или ${prefix}${shortName}`;
             }
-            helpMessage += `${name}${shortNameMessage}: ${command.description}\n\n`;
+            helpMessage += `${name}${shortNameMessage} - ${command.description}\n\n`;
         }
         await message.reply(helpMessage);
     },
