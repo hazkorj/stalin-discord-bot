@@ -32,7 +32,7 @@ client.once(Events.ClientReady, c => {
 });
 
 client.on(Events.MessageCreate, async message => {
-    if (message.author.id === client.id) return;
+    if (message.author.id === '1090892253075099678') return;
     if (!message.content.startsWith(prefix)) return;
 
     const argv = message.content.slice(prefix.length);
