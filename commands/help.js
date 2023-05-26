@@ -1,4 +1,5 @@
 const commandsData = require('config.json').commandsData;
+const prefix = require('config.json').prefix;
 
 module.exports = {
     data: {
@@ -10,9 +11,9 @@ module.exports = {
         let helpMessage = '';
         for (let key of Object.keys(commandsData)) {
             const command = commandsData[key];
-            const name = command.name;
-            const shortName = `${command.shortName}` || '';
-            let shortNameMessage = shortName;
+            const name = prefix + command.name;
+            const shortName = command.shortName || '';
+            let shortNameMessage = prefix + shortName;
             if (shortName) {
                 shortNameMessage = ` или ${shortName}`;
             }
