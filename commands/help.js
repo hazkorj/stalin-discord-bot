@@ -13,9 +13,9 @@ module.exports = {
             const command = commandsData[key];
             const name = prefix + command.name;
             const shortName = command.shortName || '';
-            let shortNameMessage = prefix + shortName;
+            let shortNameMessage = shortName;
             if (shortName) {
-                shortNameMessage = ` или ${shortName}`;
+                shortNameMessage = ` или ${prefix}${shortName}`;
             }
             helpMessage += `${name}${shortNameMessage}: ${command.description} \n`;
         }
