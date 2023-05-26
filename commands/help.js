@@ -1,7 +1,11 @@
 const commandsData = require('config.json').commandsData;
 
 module.exports = {
-    data: commandsData,
+    data: {
+        name: 'help',
+        shortName: 'h',
+        description: 'Список команд',
+    },
     async execute(message) {
         let helpMessage = '';
         for (let key of Object.keys(commandsData)) {
