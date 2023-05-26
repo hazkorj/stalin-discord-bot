@@ -3,37 +3,37 @@
   "commandsData": {
     "test": {
       "name": "test",
-      "description": ""
+      "description": "Команда для проверки работы бота"
     },
     "chatGpt": {
       "name": "chat-gpt",
       "shortName": "gpt",
-      "description": ""
+      "description": "Chat GPT версии 3.5 turbo"
     },
     "voice": {
       "name": "voice",
       "shortName": "v",
-      "description": ""
+      "description": "Воспроизведение музыки с youtube"
     },
     "pause": {
       "name": "pause",
       "shortName": "p",
-      "description": ""
+      "description": "Поставить музыку на паузу"
     },
     "unpause": {
       "name": "unpause",
       "shortName": "up",
-      "description": ""
+      "description": "Снять музыку с паузы"
     },
     "stop": {
       "name": "stop",
       "shortName": "s",
-      "description": ""
+      "description": "Выключить музыку"
     },
     "leave": {
       "name": "leave",
       "shortName": "l",
-      "description": ""
+      "description": "Выгнать бота из войс чата"
     }
   }
 }
