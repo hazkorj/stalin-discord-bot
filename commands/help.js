@@ -12,10 +12,11 @@ module.exports = {
         for (let key of Object.keys(commandsData)) {
             const command = commandsData[key];
             const name = prefix + command.name;
-            const shortName = command.shortName || '';
+            let shortName = command.shortName || '';
             let shortNameMessage = shortName;
             if (shortName) {
-                shortNameMessage = ` или ${prefix}${shortName}`;
+                shortName = prefix + shortName;
+                shortName = ` или ${prefix}${shortName}`;
             }
             helpMessage += `${name}${shortNameMessage} - ${command.description}\n\n`;
         }
