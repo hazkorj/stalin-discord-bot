@@ -7,22 +7,29 @@ module.exports = {
     data: commandData,
     async execute(message, args) {
         const videoUrl = args[0];
-        const rexExp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/;
-        if (!videoUrl || !rexExp.test(videoUrl)) return message.reply('Ссылка неопознана');
+        const rexExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/gi;
+        if (!videoUrl || !rexExp.test(videoUrl)) return message.reply('Ссылка неопознана, отправьте ссылку на youtube видео');
 
-        const voiceChannel = message.member.voice.channel;
-        if (!voiceChannel) return message.reply('вы должны находиться в голосовом канале');
+        const voiceChannel = message.member?.voice.channel;
+        if (!voiceChannel) return message.reply('Вы должны находиться в голосовом канале');
 
-        const connection = await joinVoiceChannel({
-            channelId: voiceChannel.id,
-            guildId: message.guild.id,
-            adapterCreator: voiceChannel.guild.voiceAdapterCreator,
-        });
+        try {
+            const connection = await joinVoiceChannel({
+                channelId: voiceChannel.id,
+                guildId: message.guild.id,
+                adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+            });
 
-        const stream = ytdl(videoUrl,{quality: 'highestaudio', filter: 'audioonly'});
+            const stream = ytdl(videoUrl,{filter: 'audioonly'});
+            const resource = createAudioResource(stream);
 
-        const resource = createAudioResource(stream);
-        connection.subscribe(player);
-        player.play(resource);
+            connection.subscribe(player);
+            player.play(resource);
+
+            await message.channel.send(`Сейчас играет ${stream.videoDetails.title}`);
+        } catch (err) {
+            console.error(err);
+            await message.reply('Произошла неизвестная ошибка при воспроизведении видео, попробуйте позже');
+        }
     },
 }
